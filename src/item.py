@@ -1,3 +1,8 @@
+import csv
+import os
+from csv import DictReader
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -14,11 +19,22 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quntity = quantity
-        #self.total = int(price * quantity)
-        Item.all.append(self)
+        # Item.all.append(self)
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        self.__name = name
+        if len(self.__name) >= 10:
+            print("длинна наименования товара больше 10 символов")
+        else:
+            print("длина наименования товара меньше 10 символов")
 
     def calculate_total_price(self) -> float:
         """
@@ -26,7 +42,7 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        return self.price *self.quntity
+        return self.price * self.quntity
 
     def apply_discount(self) -> None:
         """
@@ -34,10 +50,29 @@ class Item:
         """
         self.price = float(self.price * self.pay_rate)
 
+    # @classmethod
+    # def instantiate_from_csv(cls):
+    # with open("items.csv,newline=''") as csvfile:
+    # reader = csv.Dictreader(csvfile)
+    # for row in reader:
+    # print(row["name"])
 
+    @classmethod
+    def instantiate_from_csv(cls, CSV_FILE=os.path.join('..', 'src', 'items.csv')):
+
+        with open(CSV_FILE, encoding='windows-1252',newline='') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+            #name = (row["name"])
+            #price = (row["price"])
+            #quantity = (row["quantity"])
+                cls.all.append(cls(row['name'], row['price'], row['quantity']))
+
+
+    @staticmethod
+    def string_to_number(number: str):
+        return int(number.split('.')[0])
 
 
 item1 = Item("Смартфон", 10000, 20)
 item2 = Item("Ноутбук", 20000, 5)
-
-
