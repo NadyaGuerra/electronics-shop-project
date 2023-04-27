@@ -60,7 +60,7 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, CSV_FILE=os.path.join('..', 'src', 'items.csv')):
 
-        with open(CSV_FILE, encoding='windows-1252',newline='') as file:
+        with open(CSV_FILE, encoding='cp1251',newline='') as file:
             reader = csv.DictReader(file)
             for row in reader:
             #name = (row["name"])
