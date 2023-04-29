@@ -29,12 +29,11 @@ class Item:
         return self.__name
 
     @name.setter
-    def name(self, name):
-        self.__name = name
-        if len(self.__name) >= 10:
-            print("длинна наименования товара больше 10 символов")
+    def name(self, new_name):
+        if len(self.__name) <= 10:
+            self.__name = new_name
         else:
-            print("длина наименования товара меньше 10 символов")
+            raise ValueError("Длина наименования товара больше 10 символов")
 
     def calculate_total_price(self) -> float:
         """
@@ -63,9 +62,6 @@ class Item:
         with open(CSV_FILE, encoding='cp1251',newline='') as file:
             reader = csv.DictReader(file)
             for row in reader:
-            #name = (row["name"])
-            #price = (row["price"])
-            #quantity = (row["quantity"])
                 cls.all.append(cls(row['name'], row['price'], row['quantity']))
 
 
