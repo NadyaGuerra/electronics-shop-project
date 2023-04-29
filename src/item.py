@@ -24,6 +24,12 @@ class Item:
         self.quntity = quantity
         # Item.all.append(self)
 
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quntity})"
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
     @property
     def name(self):
         return self.__name
@@ -49,21 +55,13 @@ class Item:
         """
         self.price = float(self.price * self.pay_rate)
 
-    # @classmethod
-    # def instantiate_from_csv(cls):
-    # with open("items.csv,newline=''") as csvfile:
-    # reader = csv.Dictreader(csvfile)
-    # for row in reader:
-    # print(row["name"])
-
     @classmethod
     def instantiate_from_csv(cls, CSV_FILE=os.path.join('..', 'src', 'items.csv')):
 
-        with open(CSV_FILE, encoding='cp1251',newline='') as file:
+        with open(CSV_FILE, encoding='cp1251', newline='') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 cls.all.append(cls(row['name'], row['price'], row['quantity']))
-
 
     @staticmethod
     def string_to_number(number: str):
