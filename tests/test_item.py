@@ -12,3 +12,6 @@ def test_price_t(price, quantity, total):
 @pytest.mark.parametrize("price,pay_rate,total", [(10000, float(0.8),float(8000.0))])
 def test_apply_disc(price, pay_rate, total):
     assert price * pay_rate == total
+
+
+
