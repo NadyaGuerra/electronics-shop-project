@@ -18,6 +18,12 @@ def test_add(phone):
 def test_sim(phone):
     assert phone.number_of_sim == 2
 
+def test_sim_1(phone):
+    assert phone.number_of_sim==2
+
+    with pytest.raises(ValueError):
+        phone.number_of_sim= -1
+
 
 def test_str(phone):
     assert str(phone)== "iPhone 14"
