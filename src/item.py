@@ -21,11 +21,11 @@ class Item:
         """
         self.__name = name
         self.price = price
-        self.quntity = quantity
+        self.quantity = quantity
         # Item.all.append(self)
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quntity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
     def __str__(self) -> str:
         return f"{self.name}"
@@ -33,6 +33,10 @@ class Item:
     @property
     def name(self):
         return self.__name
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
 
     @name.setter
     def name(self, new_name):
@@ -47,7 +51,7 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        return self.price * self.quntity
+        return self.price * self.quantity
 
     def apply_discount(self) -> None:
         """
@@ -66,6 +70,8 @@ class Item:
     @staticmethod
     def string_to_number(number: str):
         return int(number.split('.')[0])
+
+
 
 
 item1 = Item("Смартфон", 10000, 20)
