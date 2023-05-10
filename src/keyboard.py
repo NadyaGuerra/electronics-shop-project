@@ -21,10 +21,11 @@ class MixinLanguage:
         return self
 
 
+
 class Keyboard(Item, MixinLanguage):
-    pass
-   # def __init__(self, name,price,quantity ):
-        #super().__init__(name, price, quantity)
-        #MixinLanguage.__init__(self)
+ def __init__(self, name, price, quantity):
+     Item.__init__(self, name, price, quantity)
+     MixinLanguage.__init__(self)
+
 
 
